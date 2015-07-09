@@ -1,0 +1,8 @@
+# local files
+.DS_Store
+
+# VIM
+.*.swp
+
+graylog/node-id
+graylog_web/generated.keystore

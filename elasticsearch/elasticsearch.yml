@@ -1,0 +1,7 @@
+# Elasticsearch.conf
+# See https://www.elastic.co/guide/en/elasticsearch/reference/1.6/modules.html
+# for full documentation
+
+cluster.name: "graylog-server"
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: ["elasticsearch:9300"]

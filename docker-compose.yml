@@ -1,0 +1,33 @@
+mongodata:
+  build: ./data
+mongodb:
+  image: "mongo:3.0.4"
+  hostname: mongo
+  command: "mongod --config /conf/mongo.conf"
+  volumes_from:
+    - mongodata
+  volumes:
+    - "./mongo:/conf/"
+elasticsearch:
+  image: "elasticsearch:1.6.0"
+  hostname: elasticsearch
+  volumes:
+    - "./elasticsearch/:/usr/share/elasticsearch/config"
+  environment:
+    ES_HEAP_SIZE: 1g
+graylog:
+  build: ./graylog
+  hostname: graylog
+  volumes:
+    - "./graylog/:/etc/graylog/server/"
+  links:
+    - "elasticsearch:elasticsearch.service"
+    - "mongodb:mongodb.service"
+graylogweb:
+  build: ./graylog_web
+  volumes:
+    - "./graylog_web/:/opt/graylog/conf/"
+  links:
+    - "graylog:graylog.service"
+  ports:
+    - "9443:9443"
