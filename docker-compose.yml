@@ -1,3 +1,5 @@
+# Docker-compose for Graylog
+
 mongodata:
   build: ./data
 mongodb:
@@ -23,6 +25,8 @@ graylog:
   links:
     - "elasticsearch:elasticsearch.service"
     - "mongodb:mongodb.service"
+  ports:
+    - "12900:12900"
 graylogweb:
   build: ./graylog_web
   volumes:
@@ -31,3 +35,22 @@ graylogweb:
     - "graylog:graylog.service"
   ports:
     - "9443:9443"
+
+# Based on Logspout by Gliderlabs
+# https://github.com/gliderlabs/logspout
+#
+# I created a module to send Docker logs
+# from logspout to Graylog:
+# https://github.com/micahhausler/logspout-gelf
+logspout:
+  image: "micahhausler/logspout:gelf"
+  hostname: logspout
+  command: "gelf://graylog:12201"
+  environment:
+    LOGSPOUT: ignore
+  volumes:
+    - "/var/run/docker.sock:/var/run/docker.sock"
+  links:
+    - "graylog:graylog"
+  ports:
+    - "8000:80"

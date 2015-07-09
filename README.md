@@ -18,12 +18,17 @@ docker-compose build
 docker-compose up
 ```
 
-Then open [https://192.168.59.103:9443/](https://192.168.59.103:9443/) and use the login
+Then open [https://192.168.59.103:9443/](https://192.168.59.103:9443/) and use the login. (It may take a minute for the graylog server to come online)
 
 ```
 username: admin
 password: password
 ```
+
+Then go to [https://192.168.59.103:9443/system/inputs](https://192.168.59.103:9443/system/inputs) and create a new Greylog GELF UDP input. Click "Launch" at the bottom.
+
+![Create Syslog UDP input](images/gelf_docker.png) 
+
 
 ## Security
 This is NOT a production-ready setup for graylog. You'll need add TLS to [Mongo](https://docs.mongodb.org/manual/reference/configuration-options/#net-ssl-options), [Elasticsearch](https://www.elastic.co/guide/en/shield/current/reference.html#ref-ssl-tls-settings), and the [graylog server](https://gist.github.com/micahhausler/e0b1b47738ee170c6caf#file-server-conf-L56-L68), as well as fine-tune each service for your own needs. This list of measures is not comprehensive.

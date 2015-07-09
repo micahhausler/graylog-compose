@@ -33,7 +33,9 @@ ADD https://packages.graylog2.org/releases/graylog2-server/graylog-1.1.4.tgz /op
 RUN cd /opt/ \
     && tar xfz graylog-1.1.4.tgz \
     && mv graylog-1.1.4/ graylog/ \
-    && rm graylog-1.1.4.tgz
+    && rm graylog-1.1.4.tgz \
+    && mkdir -p /opt/graylog/embedded/jre/bin/ \
+    && ln -s /usr/bin/java /opt/graylog/embedded/jre/bin/java
 
 VOLUME /var/log/graylog
 VOLUME /opt/graylog/plugin
@@ -49,5 +51,7 @@ EXPOSE 12900
 EXPOSE 514
 EXPOSE 514/udp
 
+ENV TERM xterm
+
 WORKDIR /opt/graylog
-CMD java -jar graylog.jar server
+CMD /opt/graylog/bin/graylogctl run
