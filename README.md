@@ -18,16 +18,33 @@ docker-compose build
 docker-compose up
 ```
 
-Then open [https://192.168.59.103:9443/](https://192.168.59.103:9443/) and use the login. (It may take a minute for the graylog server to come online)
+## Play
+Open [https://192.168.59.103:9443/](https://192.168.59.103:9443/) and use the login. (It may take a minute for the graylog server to come online)
 
 ```
 username: admin
 password: password
 ```
 
-Then go to [https://192.168.59.103:9443/system/inputs](https://192.168.59.103:9443/system/inputs) and create a new Greylog GELF UDP input. Click "Launch" at the bottom.
+Then go to the [Content Packs](https://192.168.59.103:9443/system/contentpacks) page, upload the provided content pack, and then click "Apply content".
 
-![Create Syslog UDP input](images/gelf_docker.png) 
+![Upload Content Pack](images/upload_cp.png)
+
+![Create Syslog UDP input](images/apply_cp.png) 
+
+### Input
+You can now go to the [Inputs page](https://192.168.59.103:9443/system/inputs) and see that the Docker GELF input has been entered to consume [logspout](https://github.com/gliderlabs/logspout) mesages from Docker (using the [GELF module](https://github.com/micahhausler/logspout-gelf)).
+
+### Streams
+Go to the [Streams page](https://192.168.59.103:9443/streams#) to see the example streams that have been created. Clock on each one to see past messages.
+
+_[Hint: Open an incognito window and enter an invalid password in the Graylog login page. This will generate some content for you to see in your streams and dashboard.]_
+
+### Dashbaords
+Go to the [Dashboards page](https://192.168.59.103:9443/dashboards) to see an example dashboard with graphs based on the 2 preconfigured streams.
+
+### Plugins
+Go to the [Graylog Plugin page](https://www.graylog.org/resources/integrations/) to see available plugins. Simply drop them in the `plugin/` directory in the project, and they'll be loaded when you restart Graylog.
 
 
 ## Security

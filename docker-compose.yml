@@ -22,6 +22,7 @@ graylog:
   hostname: graylog
   volumes:
     - "./graylog/:/etc/graylog/server/"
+    - "./plugin/:/opt/graylog/plugin/"
   links:
     - "elasticsearch:elasticsearch.service"
     - "mongodb:mongodb.service"

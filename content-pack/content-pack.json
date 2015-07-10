@@ -1,0 +1,80 @@
+{
+  "id" : null,
+  "name" : "Demo Content Pack",
+  "description" : "## DEMO\r\nThis content pack sets up an input, a few streams, and a dashboard.",
+  "category" : "Demo",
+  "inputs" : [ {
+    "title" : "Docker GELF",
+    "configuration" : {
+      "port" : 12201,
+      "override_source" : "",
+      "bind_address" : "0.0.0.0",
+      "recv_buffer_size" : 16384
+    },
+    "type" : "org.graylog2.inputs.gelf.udp.GELFUDPInput",
+    "global" : false,
+    "extractors" : [ ],
+    "static_fields" : { }
+  } ],
+  "streams" : [ {
+    "id" : "559fc809e4b0bce97e8174ea",
+    "title" : "Graylog Server Failed Authentication",
+    "description" : "AuthenticationException detected",
+    "disabled" : false,
+    "outputs" : [ ],
+    "stream_rules" : [ {
+      "type" : "REGEX",
+      "field" : "message",
+      "value" : "org.apache.shiro.authc.AuthenticationException.*",
+      "inverted" : false
+    } ]
+  }, {
+    "id" : "559fc787e4b0bce97e81745b",
+    "title" : "Graylog Server",
+    "description" : "Graylog Server Output",
+    "disabled" : false,
+    "outputs" : [ ],
+    "stream_rules" : [ {
+      "type" : "REGEX",
+      "field" : "docker.image",
+      "value" : ".*graylog",
+      "inverted" : false
+    } ]
+  } ],
+  "outputs" : [ ],
+  "dashboards" : [ {
+    "title" : "Graylog Dashboard",
+    "description" : "Detects Failed logins for graylog",
+    "dashboard_widgets" : [ {
+      "description" : "Failed Graylog Logins",
+      "type" : "SEARCH_RESULT_CHART",
+      "configuration" : {
+        "interval" : "minute",
+        "query" : "*",
+        "timerange" : {
+          "range" : 300,
+          "type" : "relative"
+        },
+        "stream_id" : "559fc809e4b0bce97e8174ea"
+      },
+      "col" : 1,
+      "row" : 1,
+      "cache_time" : 10
+    }, {
+      "description" : "All Graylog Servre messages",
+      "type" : "SEARCH_RESULT_CHART",
+      "configuration" : {
+        "interval" : "minute",
+        "query" : "*",
+        "timerange" : {
+          "range" : 300,
+          "type" : "relative"
+        },
+        "stream_id" : "559fc787e4b0bce97e81745b"
+      },
+      "col" : 1,
+      "row" : 2,
+      "cache_time" : 10
+    } ]
+  } ]
+}
