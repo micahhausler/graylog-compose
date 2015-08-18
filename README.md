@@ -46,6 +46,22 @@ Go to the [Dashboards page](https://192.168.59.103:9443/dashboards) to see an ex
 ### Plugins
 Go to the [Graylog Plugin page](https://www.graylog.org/resources/integrations/) to see available plugins. Simply drop them in the `plugin/` directory in the project, and they'll be loaded when you restart Graylog.
 
+### API explorer
+Go to the Graylog API-Explorer [http://192.168.59.103:12900/api-explorer/](http://192.168.59.103:12900/api-explorer/) From here, you can play around with their [swagger](http://swagger.io/) api explorer.
+
+If you're using `docker-machine` instead of boot2docker, edit the line
+
+```
+rest_transport_uri= http://192.168.59.103:12900/
+```
+in `graylog/server.conf` and change it to your docker machine's IP. You'll need to restart everything for this to take effect by running
+
+```
+docker-compose stop
+docker-compse rm -f
+docker-compose up
+```
+
 
 ## Security
 This is NOT a production-ready setup for graylog. You'll need add TLS to [Mongo](https://docs.mongodb.org/manual/reference/configuration-options/#net-ssl-options), [Elasticsearch](https://www.elastic.co/guide/en/shield/current/reference.html#ref-ssl-tls-settings), and the [graylog server](https://gist.github.com/micahhausler/e0b1b47738ee170c6caf#file-server-conf-L56-L68), as well as fine-tune each service for your own needs. This list of measures is not comprehensive.

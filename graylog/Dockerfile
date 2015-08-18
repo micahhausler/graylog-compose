@@ -37,8 +37,8 @@ RUN cd /opt/ \
     && mkdir -p /opt/graylog/embedded/jre/bin/ \
     && ln -s /usr/bin/java /opt/graylog/embedded/jre/bin/java
 
-VOLUME /var/log/graylog
 VOLUME /opt/graylog/plugin
+#VOLUME /opt/graylog/data
 
 # gelf tcp/udp
 EXPOSE 12201

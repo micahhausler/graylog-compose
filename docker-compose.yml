@@ -1,18 +1,20 @@
 # Docker-compose for Graylog
 
-mongodata:
+persistdata:
   build: ./data
 mongodb:
   image: "mongo:3.0.4"
   hostname: mongo
   command: "mongod --config /conf/mongo.conf"
   volumes_from:
-    - mongodata
+    - persistdata
   volumes:
     - "./mongo:/conf/"
 elasticsearch:
   image: "elasticsearch:1.6.0"
   hostname: elasticsearch
+  volumes_from:
+    - persistdata
   volumes:
     - "./elasticsearch/:/usr/share/elasticsearch/config"
   environment:
@@ -20,6 +22,8 @@ elasticsearch:
 graylog:
   build: ./graylog
   hostname: graylog
+  volumes_from:
+    - persistdata
   volumes:
     - "./graylog/:/etc/graylog/server/"
     - "./plugin/:/opt/graylog/plugin/"
