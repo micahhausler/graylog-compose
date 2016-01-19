@@ -3,10 +3,10 @@ This `docker-compose.yml` runs all the required processes for a Graylog setup on
 
 The following processes are run in their own docker containers
 
-* mongodb
-* elasticsearch
-* graylog 1.1.4
-* graylog-web 1.1.4
+* mongodb 3.0.4
+* elasticsearch 1.7.4
+* graylog 1.3.3
+* graylog-web 1.3.3
 
 ## Setup
 This setup assumes you already have docker-compose and docker (using boot2docker) installed.
