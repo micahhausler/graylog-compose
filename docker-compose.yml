@@ -16,7 +16,7 @@ mongodb:
   volumes:
     - "./mongo:/conf/"
 elasticsearch:
-  image: "elasticsearch:1.6.0"
+  image: "elasticsearch:1.7.4"
   hostname: elasticsearch
   volumes_from:
     - persistdata
