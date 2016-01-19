@@ -3,10 +3,10 @@ This `docker-compose.yml` runs all the required processes for a Graylog setup on
 
 The following processes are run in their own docker containers
 
-* mongodb
-* elasticsearch
-* graylog 1.1.4
-* graylog-web 1.1.4
+* mongodb 3.0.4
+* elasticsearch 1.7.4
+* graylog 1.3.3
+* graylog-web 1.3.3
 
 ## Setup
 This setup assumes you already have docker-compose and docker (using boot2docker) installed.
@@ -30,7 +30,7 @@ Then go to the [Content Packs](https://192.168.59.103:9443/system/contentpacks) 
 
 ![Upload Content Pack](images/upload_cp.png)
 
-![Create Syslog UDP input](images/apply_cp.png) 
+![Create Syslog UDP input](images/apply_cp.png)
 
 ### Input
 You can now go to the [Inputs page](https://192.168.59.103:9443/system/inputs) and see that the Docker GELF input has been entered to consume [logspout](https://github.com/gliderlabs/logspout) mesages from Docker (using the [GELF module](https://github.com/micahhausler/logspout-gelf)).
@@ -47,7 +47,7 @@ Go to the [Dashboards page](https://192.168.59.103:9443/dashboards) to see an ex
 Go to the [Graylog Plugin page](https://www.graylog.org/resources/integrations/) to see available plugins. Simply drop them in the `plugin/` directory in the project, and they'll be loaded when you restart Graylog.
 
 ### API explorer
-Go to the Graylog API-Explorer [http://192.168.59.103:12900/api-explorer/](http://192.168.59.103:12900/api-explorer/) From here, you can play around with their [swagger](http://swagger.io/) api explorer.
+Go to the Graylog API-Explorer [http://192.168.59.103:12900/api-browser](http://192.168.59.103:12900/api-browser) From here, you can play around with their [swagger](http://swagger.io/) api explorer.
 
 If you're using `docker-machine` instead of boot2docker, edit the line
 

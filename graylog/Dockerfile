@@ -3,6 +3,7 @@ FROM debian:jessie
 MAINTAINER Micah Hausler, micah.hausler@ambition.com
 
 ENV DEBIAN_FRONTEND noninteractive
+ENV GRAYLOG_VERSION 1.3.3
 
 ENV JAVA_HOME /opt/graylog/embedded/jre
 
@@ -28,17 +29,16 @@ RUN apt-get update && \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
-ADD https://packages.graylog2.org/releases/graylog2-server/graylog-1.1.4.tgz /opt/graylog-1.1.4.tgz
+ADD https://packages.graylog2.org/releases/graylog2-server/graylog-$GRAYLOG_VERSION.tgz /opt/
 
 RUN cd /opt/ \
-    && tar xfz graylog-1.1.4.tgz \
-    && mv graylog-1.1.4/ graylog/ \
-    && rm graylog-1.1.4.tgz \
+    && tar xfz graylog-$GRAYLOG_VERSION.tgz \
+    && mv graylog-$GRAYLOG_VERSION/ graylog/ \
+    && rm graylog-$GRAYLOG_VERSION.tgz \
     && mkdir -p /opt/graylog/embedded/jre/bin/ \
     && ln -s /usr/bin/java /opt/graylog/embedded/jre/bin/java
 
 VOLUME /opt/graylog/plugin
-#VOLUME /opt/graylog/data
 
 # gelf tcp/udp
 EXPOSE 12201

@@ -1,7 +1,12 @@
 # Docker-compose for Graylog
 
 persistdata:
-  build: ./data
+  image: alpine
+  command: /bin/true
+  volumes:
+    - "/data"
+    - "/usr/share/elasticsearch/data"
+    - "/opt/graylog/data"
 mongodb:
   image: "mongo:3.0.4"
   hostname: mongo
@@ -11,7 +16,7 @@ mongodb:
   volumes:
     - "./mongo:/conf/"
 elasticsearch:
-  image: "elasticsearch:1.6.0"
+  image: "elasticsearch:1.7.4"
   hostname: elasticsearch
   volumes_from:
     - persistdata
