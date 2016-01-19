@@ -1,7 +1,12 @@
 # Docker-compose for Graylog
 
 persistdata:
-  build: ./data
+  image: alpine
+  command: /bin/true
+  volumes:
+    - "/data"
+    - "/usr/share/elasticsearch/data"
+    - "/opt/graylog/data"
 mongodb:
   image: "mongo:3.0.4"
   hostname: mongo
