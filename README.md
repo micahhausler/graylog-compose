@@ -40,7 +40,7 @@ Go to the [Streams page](https://192.168.59.103:9443/streams#) to see the exampl
 
 _[Hint: Open an incognito window and enter an invalid password in the Graylog login page. This will generate some content for you to see in your streams and dashboard.]_
 
-### Dashbaords
+### Dashboards
 Go to the [Dashboards page](https://192.168.59.103:9443/dashboards) to see an example dashboard with graphs based on the 2 preconfigured streams.
 
 ### Plugins
